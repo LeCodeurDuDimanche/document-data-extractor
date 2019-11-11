@@ -1,0 +1,28 @@
+{
+    "tesseractConfiguration": {
+        "psm": "8",
+        "tessdataDir": "/usr/share/tessdata_fast"
+    },
+    "regionsOfInterest": [
+        {
+            "label": "Name of the company",
+            "dataType": "text",
+            "rect": [
+                150,
+                30,
+                100,
+                20
+            ]
+        },
+        {
+            "label": "Total",
+            "dataType": "integer",
+            "rect": [
+                200,
+                80,
+                30,
+                20
+            ]
+        }
+    ]
+}

@@ -1,0 +1,3 @@
+/vendor/
+tests/*.json
+!tests/example-config.json

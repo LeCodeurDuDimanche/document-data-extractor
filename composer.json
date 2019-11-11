@@ -1,0 +1,25 @@
+{
+    "name": "lecodeurdudimanche/document-data-extractor",
+    "description": "A simple library to extract data from documents with a known structure",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrien Duval",
+            "email": "adrien.duval.bonnet@gmail.com"
+        }
+    ],
+    "require": {
+        "thiagoalessio/tesseract_ocr": ">=2.8.0"
+    },
+    "autoload": {
+		"psr-4": {
+			"lecodeurdudimanche\\DocumentDataExtractor\\": "src/"
+		}
+	},
+    "autoload-dev": {
+		"psr-4": {
+			"lecodeurdudimanche\\DocumentDataExtractor\\Tests\\": "tests/"
+		}
+	}
+}
