@@ -8,14 +8,12 @@ class Extractor
 
     private $config;
     private $image;
-    private $imageIsFile;
 
     public function __construct($config = null)
     {
         $this->config = $config ?? new Configuration();
         $this->image = null;
         $this->imageSize = 0;
-        $this->imageIsFile = false;
     }
 
     public function loadConfig(string $configPath) : Extractor
@@ -52,8 +50,7 @@ class Extractor
     public function loadImage(string $imagePath) : Extractor
     {
         //TODO: check path ?
-        $this->image = $imagePath;
-        $this->imageIsFile = true;
+        $this->setImage(new \Imagick($imagePath));
 
         return $this;
     }
@@ -74,9 +71,8 @@ class Extractor
                 imagepng($image, null, 0);
                 $image = ob_get_clean();
             }
-
-            $image = new \Imagick();
-            $this->image->readFromBlob($image);
+            $this->image = new \Imagick();
+            $this->image->readImageBlob($image);
         }
 
         return $this;
