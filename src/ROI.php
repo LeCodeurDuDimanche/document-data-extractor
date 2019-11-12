@@ -1,22 +1,23 @@
 <?php
 namespace lecodeurdudimanche\DocumentDataExtractor;
 
-class ROI implements \JsonSerializable{
+class ROI implements \JsonSerializable
+{
 
     /**
-    * The type of the data located in this region of interest.
-    * Can be 'integer', 'float', 'devise', 'address' (?), 'text' or a three character language code for generic text in this language
-    **/
+     * The type of the data located in this region of interest.
+     * Can be 'integer', 'float', 'devise', 'address' (?), 'text' or a three character language code for generic text in this language
+     **/
     private $dataType;
 
     /**
-    * A unique identifier for the data
-    **/
+     * A unique identifier for the data
+     **/
     private $label;
 
     /**
-    * The area of this ROI
-    **/
+     * The area of this ROI
+     **/
     private $rect;
 
 

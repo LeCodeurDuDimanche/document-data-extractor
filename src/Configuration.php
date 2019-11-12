@@ -3,7 +3,8 @@ namespace lecodeurdudimanche\DocumentDataExtractor;
 
 use thiagoalessio\TesseractOCR\TesseractOCR;
 
-class Configuration {
+class Configuration
+{
 
     private $tesseractConfiguration = [];
     private $regionsOfInterest = [];
@@ -27,28 +28,29 @@ class Configuration {
 
     public function configureTesseract(TesseractOCR $tesseract, string $dataType) : TesseractOCR
     {
-        foreach($this->tesseractConfiguration as $key => $value)
+        foreach($this->tesseractConfiguration as $key => $value) {
             $tesseract->$key($value);
+        }
 
         switch ($dataType) {
-            case 'integer':
-            case 'float':
-                // TODO: add post-processing function
-                $tesseract->digits();
+        case 'integer':
+        case 'float':
+            // TODO: add post-processing function
+            $tesseract->digits();
+            break;
+        case 'devise':
+            //TODO: Add more missing values
+            $tesseract->whitelist(["€", "$", "£"]);
+            break;
+        case 'address':
+            throw Exception("Not implemented");
                 break;
-            case 'devise':
-                //TODO: Add more missing values
-                $tesseract->whitelist(["€", "$", "£"]);
-                break;
-            case 'address':
-                throw Exception("Not implemented");
-                break;
-            case 'text':
-                $tesseract->lang("Latin");
-                break;
-            default:
-                $tesseract->lang($dataType);
-                break;
+        case 'text':
+            $tesseract->lang("Latin");
+            break;
+        default:
+            $tesseract->lang($dataType);
+            break;
         }
         $tesseract->withoutTempFiles();
         return $tesseract;
@@ -60,19 +62,23 @@ class Configuration {
         return $this->regionsOfInterest;
     }
 
-    public static function fromArray(array $data) : Configuration
+    public function fromArray(array $data) : Configuration
     {
-        $config = new Configuration();
-        $config->tesseractConfiguration = $data["tesseractConfiguration"];
-        $config->regionsOfInterest = $data["regionsOfInterest"];
-        return $config;
+        $this->tesseractConfiguration = $data["tesseractConfiguration"];
+        $this->regionsOfInterest = $data["regionsOfInterest"];
+        return $this;
     }
 
-    public static function fromFile(string $path) : Configuration
+    /**
+     * Don't pass any unverified user input !!
+     * For instance, user input of the configuration 'executable' could lead to
+     * arbitrary code execution
+     */
+    public function fromFile(string $path) : Configuration
     {
         $data = json_decode(file_get_contents($path), true);
         $data['regionsOfInterest'] = array_map(ROI::class . '::fromArray', $data['regionsOfInterest']);
-        return self::fromArray($data);
+        return $this->fromArray($data);
     }
 
     public function toArray() : array
@@ -82,6 +88,6 @@ class Configuration {
 
     public function toFile(string $path) : bool
     {
-        return file_put_contents($path, json_encode($this->toArray(), JSON_PRETTY_PRINT)) !== FALSE;
+        return file_put_contents($path, json_encode($this->toArray(), JSON_PRETTY_PRINT)) !== false;
     }
 }
