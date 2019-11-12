@@ -2,7 +2,7 @@
     "name": "lecodeurdudimanche/document-data-extractor",
     "description": "A simple library to extract data from documents with a known structure",
     "type": "library",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "license": "MIT",
     "authors": [
         {
