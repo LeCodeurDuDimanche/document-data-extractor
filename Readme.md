@@ -13,16 +13,16 @@ First, you'll need to define what data you want to extract and where it is on th
 ```php
     $extractor = new Extractor();
     $regionsOfInterest = [
-        // The name of the company is in the rectangle with the top left corner (150, 30) and a size of (100, 20)
-        new ROI('Name of the company')->setRect(150, 30, 100, 20),
-        new ROI('Total', 'integer')->setRect(200, 80, 30, 20);
+        // The name of the company is in the rectangle with the top left corner (700, 180) and a size of (1080, 160)
+        new ROI('Name of the company')->setRect(700, 180, 1080, 160),
+        new ROI('Total', 'integer')->setRect(1980, 1572, 58, 52);
     ];
 ```
 Next you can add some options forwarded to tesseract in order to get more precise results :
 ```php
     $tesseractConfiguration = [
         'psm' => 8, // Page segmentation method is set to 8 (single word)
-        'tessdataDir' => '/usr/share/tessdata_fast' // Other tesseract options ...
+        'tessdataDir' => '/usr/share/tessdata' // Other tesseract options ...
     ];
     $config = Configuration::fromArray(compact('regionsOfInterest', 'tesseractConfiguration'));
     $extractor->setConfig($config);
@@ -38,8 +38,8 @@ And finally you call the `run()` method to extract the data :
     $data = $extractor->run();
     /*
     * $data = [
-    * ['label' => 'Name of the company', 'dataType' => 'text', 'data' => 'Company Limited'],
-    * ['label' => 'Total', 'dataType' => 'integer', 'data' => '125']
+    * ['label' => 'Name of the company', 'type' => 'text', 'data' => 'Company Limited'],
+    * ['label' => 'Total', 'type' => 'integer', 'data' => '55']
     * ];
     */
 ```
