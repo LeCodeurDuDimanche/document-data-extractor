@@ -1,3 +1,2 @@
 /vendor/
-tests/*.json
-!tests/example-config.json
+.phpunit.result.cache

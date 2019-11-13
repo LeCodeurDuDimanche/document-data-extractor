@@ -17,7 +17,7 @@ final class DocumentDataExtractorTest extends TestCase
     private $pdfConfigPath = __DIR__ . "/data/pdf-config.json";
 
 
-    public function testRunWithGDImage()
+    public function test_run_with_GD_image()
     {
         $image = imagecreatefrompng($this->imagePath);
         $actualData = (new Extractor())
@@ -27,7 +27,7 @@ final class DocumentDataExtractorTest extends TestCase
         $this->assertEquals($this->expectedData, $actualData);
     }
 
-    public function testRunWithPDF()
+    public function test_run_with_PDF()
     {
         $actualData = (new Extractor())
                     ->loadConfig($this->pdfConfigPath)
@@ -36,7 +36,7 @@ final class DocumentDataExtractorTest extends TestCase
         $this->assertEquals($this->expectedData, $actualData);
     }
 
-    public function testRunWithRawImageData()
+    public function test_run_with_raw_image_data()
     {
         $imageData = file_get_contents($this->imagePath);
         $actualData = (new Extractor())
@@ -46,7 +46,7 @@ final class DocumentDataExtractorTest extends TestCase
         $this->assertEquals($this->expectedData, $actualData);
     }
 
-    public function testRunWithImagickImage()
+    public function test_run_with_Imagick_image()
     {
         $image = new \Imagick($this->imagePath);
         $actualData = (new Extractor())
@@ -56,7 +56,7 @@ final class DocumentDataExtractorTest extends TestCase
         $this->assertEquals($this->expectedData, $actualData);
     }
 
-    public function testRunLoadingImage()
+    public function test_run_loading_image()
     {
         $actualData = (new Extractor())
                     ->loadConfig($this->configPath)
