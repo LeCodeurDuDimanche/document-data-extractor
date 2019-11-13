@@ -35,7 +35,7 @@ class Extractor
         return $this;
     }
 
-    public function loadPDF(string $pdfPath, int $page = 0, ?int $resolution = null) : Extractor
+    public function loadPDF(string $pdfPath, int $page = 0, int $resolution = null) : Extractor
     {
         $imagick = new \Imagick();
         $imagick->readImage("${pdfPath}[${page}]");

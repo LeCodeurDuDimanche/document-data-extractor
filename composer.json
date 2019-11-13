@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "thiagoalessio/tesseract_ocr": ">=2.8.0"
+        "thiagoalessio/tesseract_ocr": ">=2.8.0",
+        "php": "^7"
     },
     "autoload": {
 		"psr-4": {
