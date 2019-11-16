@@ -7,6 +7,18 @@ This library uses Tesseract to read text from documents and Imagick to manipulat
 
 It relies on GhostScript (`gs`) to convert pdf files to images.
 
+## Installation
+
+Install required php libraries : `php-imagick`. On Ubuntu : 
+```bash
+apt install php7-imagick
+```
+
+Then install the package via composer :
+```bash
+composer require lecodeurdudimanche/document-data-extractor
+```
+
 ## Usage
 
 First, you'll need to define what data you want to extract and where it is on the image :
